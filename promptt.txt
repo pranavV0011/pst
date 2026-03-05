@@ -1,0 +1,133 @@
+You are an expert full-stack software architect.
+
+I have two existing projects and I want to create a **new scalable project by combining them correctly**.
+
+Project 1: **Dashboard-copy**
+This project contains the **correct business logic**, including:
+
+* All KPI formulas
+* KPI calculation logic
+* Data processing and aggregation logic used in the dashboard
+
+However, this project currently **fetches data from CSV files**, which should **not be used in the new system**.
+
+Project 2: **vvvv-8**
+This project contains the **UI and layout that I want to use**, including:
+
+* Dashboard layout
+* KPI card layout
+* Charts
+* Sidebar and navigation
+* Drill-in page structure
+
+The **UI from vvvv-8 must be used**, but the **KPI formulas and logic must come from Dashboard-copy**.
+
+---
+
+# Goal
+
+Build a **new scalable multi-client RCM dashboard project** that merges:
+
+* **UI structure from vvvv-8**
+* **KPI logic and formulas from Dashboard-copy**
+
+---
+
+# Core Requirements
+
+### 1. Client Configuration System
+
+Each client must have its **own JSON configuration file**.
+
+This configuration will define:
+
+* Client name and metadata
+* Which KPIs appear on the dashboard
+* Layout of the KPI cards
+* KPI formulas
+* Database schema used for that client
+
+The application must dynamically load the correct configuration based on the client being accessed.
+
+---
+
+### 2. PostgreSQL Data Source
+
+Replace the CSV data fetching system with **PostgreSQL**.
+
+Each client must have its **own database schema**.
+
+The backend should dynamically use the correct schema depending on the client.
+
+Create a **clean database abstraction layer** so UI components never interact directly with SQL queries.
+
+---
+
+### 3. Centralized KPI Engine
+
+All KPI formulas from the **Dashboard-copy project** must be moved into a **central KPI engine module**.
+
+This module should:
+
+* Accept raw data from the database layer
+* Perform KPI calculations and aggregations
+* Return computed KPI values
+
+This ensures KPI logic is reusable and maintainable.
+
+---
+
+### 4. Dynamic Client Routing
+
+The application must support **dynamic routing for clients**.
+
+When a client dashboard is opened, the system should:
+
+1. Detect the client
+2. Load the client configuration
+3. Fetch data using that client’s PostgreSQL schema
+4. Calculate KPIs using the KPI engine
+5. Render the dashboard using the layout defined in the configuration
+
+---
+
+### 5. Scalable Architecture
+
+The project must be designed so that it can easily support **many clients**.
+
+Adding a new client should only require adding a **new configuration file**, without modifying core dashboard logic.
+
+The system should be modular, maintainable, and scalable.
+
+---
+
+### 6. Initial Client
+
+For now, implement **only one client: Piedmont**.
+
+The architecture must make it easy to add more clients later.
+
+---
+
+### 7. Technology Stack
+
+Use the same stack as the existing projects:
+
+* Next.js (App Router)
+* TypeScript
+* PostgreSQL
+* Tailwind CSS
+* Recharts
+
+---
+
+# Expected Result
+
+Create a **clean, scalable project architecture** that combines:
+
+* The **UI from vvvv-8**
+* The **KPI formulas and logic from Dashboard-copy**
+* A **PostgreSQL-based backend**
+* A **client configuration system using JSON**
+
+The result should be a **scalable multi-client RCM dashboard platform**.
